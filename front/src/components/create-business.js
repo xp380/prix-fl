@@ -109,7 +109,7 @@ export default class CreateBusiness extends Component {
 
         };
 
-        axios.post('http://localhost:4000/businesses/create', userObject)
+        axios.post(`${process.env.REACT_APP_SERVER_URL}businesses/create`, userObject)
             .then((res) => {
                 console.log(res.data)
             }).catch((error) => {
