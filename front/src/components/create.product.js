@@ -105,7 +105,7 @@ export default class CreateUser extends Component {
             adresse: this.props.adresse
         };
 
-        axios.post('http://localhost:4000/users/create', userObject)
+        axios.post(`${process.env.REACT_APP_SERVER_URL}/users/create`, userObject)
             .then((res) => {
                 console.log(res.data)
             }).catch((error) => {
