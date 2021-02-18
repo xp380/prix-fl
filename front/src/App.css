@@ -1,0 +1,8 @@
+@import "~antd/dist/antd.css";
+
+
+img {
+    width: 100px;
+    height: 100px;
+    margin: 0 10px;
+  }
