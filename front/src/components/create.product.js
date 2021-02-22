@@ -118,7 +118,7 @@ export default class CreateUser extends Component {
             codeMag: this.state.codeMag,
             notification: this.state.notification,
             entite: this.props.entite,
-            logo: this.state.logo,
+            logo: this.props.logo,
             adresse: this.props.adresse,
             ville: this.props.ville,
             codePostal: this.props.codePostal

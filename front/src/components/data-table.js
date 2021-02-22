@@ -41,9 +41,6 @@ class DataTable extends Component {
                     {this.props.obj.entite}
                 </td>
                 <td>
-                    {this.props.obj.logo}
-                </td>
-                <td>
                     {this.props.obj.adresse}
                 </td>
                 <td>
@@ -51,6 +48,9 @@ class DataTable extends Component {
                 </td>
                 <td>
                     {this.props.obj.codePostal}
+                </td>
+                <td>
+                    {this.props.obj.logo}
                 </td>
             </tr>
         );

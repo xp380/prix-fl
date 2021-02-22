@@ -6,7 +6,7 @@ import axios from 'axios';
 import './App.css'
 
 
-import Businesses from './components/businesses'
+// import Businesses from './components/businesses'
 import Users from "./components/users";
 import Login from './components/login'
 import Home from './components/home';
@@ -53,9 +53,9 @@ function App() {
               <li className="nav-item">
                 <Link className="nav-link" to={"/prices"}>Products List</Link>
               </li>
-              <li className="nav-item">
+              {/* <li className="nav-item">
                 <Link className="nav-link" to={"/businesses"}>Businesses List</Link>
-              </li>
+              </li> */}
               <li className="nav-item">
                 <Link className="nav-link" to={"/duplicate"}>Formulaires à remplir</Link>
               </li>
@@ -71,7 +71,7 @@ function App() {
               <PrivateRoute exact path="/" component={Home} />
               <PrivateRoute path="/prices" component={Users} />
               <PublicRoute path="/login" component={Login} />
-              <PrivateRoute path="/businesses" component={Businesses} />
+              {/* <PrivateRoute path="/businesses" component={Businesses} /> */}
               <PrivateRoute path="/duplicate" component={Duplicate} />
             </Switch>
             <p style={{ display: "flex", flexwrap: "wrap", padding: "10px", margin: '0 10px' }} >

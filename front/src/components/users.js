@@ -49,6 +49,7 @@ export default class Users extends Component {
                                 <td>ADRESSE</td>
                                 <td>VILLE</td>
                                 <td>CODEPOSTAL</td>
+                                <td>LOGO</td>
                             </tr>
                         </thead>
                         <tbody>
