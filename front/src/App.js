@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Link } from "react-router-dom";
 import axios from 'axios';
 
 import './App.css'
@@ -43,7 +43,7 @@ function App() {
     <div className="App">
       <header>
         <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
-          <a href="GreenVillage" className="navbar-brand">GreenVillage Trading App</a>
+          <p className="navbar-brand">Prix-FL</p>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav ml-auto">
               <li className="nav-item active">
@@ -51,7 +51,7 @@ function App() {
               </li>
 
               <li className="nav-item">
-                <Link className="nav-link" to={"/users"}>Products List</Link>
+                <Link className="nav-link" to={"/prices"}>Products List</Link>
               </li>
               <li className="nav-item">
                 <Link className="nav-link" to={"/businesses"}>Businesses List</Link>
@@ -68,8 +68,8 @@ function App() {
         <div className="row">
           <div className="col-md-12">
             <Switch>
-              <Route exact path="/" component={Home} />
-              <PrivateRoute path="/users" component={Users} />
+              <PrivateRoute exact path="/" component={Home} />
+              <PrivateRoute path="/prices" component={Users} />
               <PublicRoute path="/login" component={Login} />
               <PrivateRoute path="/businesses" component={Businesses} />
               <PrivateRoute path="/duplicate" component={Duplicate} />

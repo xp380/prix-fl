@@ -26,6 +26,7 @@ export default class CreateBusiness extends Component {
         this.onSubmit = this.onSubmit.bind(this);
 
         this.state = {
+            submit: "",
             promo: true,
             prix: "",
             origine: '',
@@ -38,7 +39,6 @@ export default class CreateBusiness extends Component {
             codeMag: '',
             entite: "",
             adresse: "",
-            logo: "",
             notification: ""
         }
     }

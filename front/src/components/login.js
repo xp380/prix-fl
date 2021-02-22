@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { setUserSession } from '../utils/common';
 
+
 function Login(props) {
     const [loading, setLoading] = useState(false);
     const username = useFormInput('');
@@ -9,7 +10,8 @@ function Login(props) {
     const [error, setError] = useState(null);
 
     // handle button click of login form
-    const handleLogin = () => {
+    const handleLogin = (e) => {
+        e.preventDefault();
         setError(null);
         setLoading(true);
         axios.post(`${process.env.REACT_APP_SERVER_URL}/users/signin`, { username: username.value, password: password.value }).then(response => {
@@ -22,6 +24,7 @@ function Login(props) {
             else setError("Something went wrong. Please try again later.");
         });
     }
+    
 
     return (
         <div>
@@ -35,7 +38,7 @@ function Login(props) {
                 <input type="password" {...password} autoComplete="new-password" />
             </div>
             {error && <><small style={{ color: 'red' }}>{error}</small><br /></>}<br />
-            <input type="button" value={loading ? 'Loading...' : 'Login'} onClick={handleLogin} disabled={loading} /><br />
+            <input type="submit" value={loading ? 'Loading...' : 'Login'} onClick={handleLogin} disabled={loading} /><br />
         </div>
     );
 }

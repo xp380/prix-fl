@@ -26,26 +26,6 @@ export default class Users extends Component {
             return <DataTable obj={data} key={i} />;
         });
     }
-    // {_.sortBy(people, 'name').map( (person) => {
-    //     return (
-    //         <li>
-    //             <span>{person.name}</span>
-    //             <span>{person.id}</span>
-    //         </li>
-    //     )
-    // })}
-    // dataTable() {
-    //     {
-    //         _.sortBy(this.state.usersCollection, 'adresse').map((data, i) => {
-    //             return (
-    //                 <li>
-    //                     <span>{data.adresse}</span>
-    //                 </li>
-    //                 // <DataTable obj={data} key={i} />
-    //             )
-    //         })
-    //     }
-    // }
 
     render() {
         return (
@@ -67,6 +47,8 @@ export default class Users extends Component {
                                 <td>CODEPlu</td>
                                 <td>ENTITE</td>
                                 <td>ADRESSE</td>
+                                <td>VILLE</td>
+                                <td>CODEPOSTAL</td>
                             </tr>
                         </thead>
                         <tbody>

@@ -19,12 +19,16 @@ export default class CreateUser extends Component {
         this.onChangeUserCodeMagasin = this.onChangeUserCodeMagasin.bind(this);
         this.onChangeUserEntite = this.onChangeUserEntite.bind(this);
         this.onChangeUserAdresse = this.onChangeUserAdresse.bind(this);
+        this.onChangeUserVille = this.onChangeUserVille.bind(this);
+        this.onChangeUserCodePostal = this.onChangeUserCodePostal.bind(this);
+        this.onChangeUserLogo = this.onChangeUserLogo.bind(this);
         this.openNotification = this.openNotification.bind(this);
 
         this.onSubmit = this.onSubmit.bind(this);
 
+        
         this.state = {
-            promo: true,
+            promo: false,
             prix: "",
             origine: '',
             cat: '',
@@ -35,7 +39,10 @@ export default class CreateUser extends Component {
             codePlu: "",
             codeMag: '',
             entite: "",
+            logo: "",
             adresse: "",
+            ville: "",
+            codePostal: "",
             notification: '',
         }
     }
@@ -73,8 +80,17 @@ export default class CreateUser extends Component {
     onChangeUserEntite(e) {
         this.setState({ entite: e.target.value })
     }
+    onChangeUserLogo(e) {
+        this.setState({ logo: e.target.value })
+    }
     onChangeUserAdresse(e) {
         this.setState({ adresse: e.target.value })
+    }
+    onChangeUserVille(e) {
+        this.setState({ ville: e.target.value })
+    }
+    onChangeUserCodePostal(e) {
+        this.setState({ codePostal: e.target.value })
     }
 
     openNotification = () => {
@@ -102,7 +118,10 @@ export default class CreateUser extends Component {
             codeMag: this.state.codeMag,
             notification: this.state.notification,
             entite: this.props.entite,
-            adresse: this.props.adresse
+            logo: this.state.logo,
+            adresse: this.props.adresse,
+            ville: this.props.ville,
+            codePostal: this.props.codePostal
         };
 
         axios.post(`${process.env.REACT_APP_SERVER_URL}/users/create`, userObject)
@@ -120,10 +139,11 @@ export default class CreateUser extends Component {
             <div className="wrapper">
                 <form onSubmit={this.onSubmit} style={{ padding: '1em', border: '2px solid #c1c1c1', marginTop: '2rem', width: '150px', height: 'auto' }}>
                     <img className="circle-img" src={this.props.img} alt="avatar_img" />
-
+                    <input type="hidden" value={this.props.logo} onChange={this.onChangeUserLogo} className="form-control" style={{ width: "100px" }} />
                     <input type="hidden" value={this.props.entite} onChange={this.onChangeUserEntite} className="form-control" style={{ width: "100px" }} />
                     <input type="hidden" value={this.props.adresse} onChange={this.onChangeUserAdresse} className="form-control" style={{ width: "100px" }} />
-
+                    <input type="hidden" value={this.props.ville} onChange={this.onChangeUserVille} className="form-control" style={{ width: "100px" }} />
+                    <input type="hidden" value={this.props.codePostal} onChange={this.onChangeUserCodePostal} className="form-control" style={{ width: "100px" }} />
                     <Popover title='Promo'>
                         <input type="checkbox" checked={this.state.promo} onChange={this.onChangeUserPromo} />
                     </Popover>
@@ -139,6 +159,12 @@ export default class CreateUser extends Component {
                             <option value="FR">FR</option>
                             <option value="EN">EN</option>
                             <option value="IT">IT</option>
+                            <option value="Maurice">Maurice</option>
+                            <option value="Costa Rica">Costa Rica</option>
+                            <option value="Pays tiers">Pays tiers</option>
+                            <option value="Equateur">Equateur</option>
+                            <option value="Côte d'ivoire">Côte d'ivoire</option>
+
                         </select>
                     </div>
                     <div className="form-group">
@@ -158,6 +184,10 @@ export default class CreateUser extends Component {
                             <option value="Sachet">Sachet</option>
                             <option value="Cagette">Cagette</option>
                             <option value="Pièce">Pièce</option>
+                            <option value="Vrac">Vrac</option>
+                            <option value="L'unité">L'unité</option>
+                            <option value="1.220 kg">1.220 kg</option>
+                            <option value="400 g">400 g</option>
                         </select>
                     </div>
                     <div className="form-group">

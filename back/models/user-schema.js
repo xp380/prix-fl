@@ -38,7 +38,16 @@ let userSchema = new Schema({
     },
     adresse: {
         type: String
-    }
+    },
+    ville: {
+        type: String
+    },
+    codePostal: {
+        type: String
+    },
+    logo: {
+        type: String
+    },
 }, {
     collection: 'users'
 })
