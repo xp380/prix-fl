@@ -164,7 +164,7 @@ export default class CreateUser extends Component {
                             <option value="Pays tiers">Pays tiers</option>
                             <option value="Equateur">Equateur</option>
                             <option value="Côte d'ivoire">Côte d'ivoire</option>
-
+                            <option value=""></option>
                         </select>
                     </div>
                     <div className="form-group">

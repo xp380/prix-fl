@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { setUserSession } from '../utils/common';
-
+ 
 
 function Login(props) {
     const [loading, setLoading] = useState(false);
@@ -28,6 +28,7 @@ function Login(props) {
 
     return (
         <div>
+            <form onSubmit={handleLogin} style={{ padding: '1em', border: '2px solid blue', marginTop: '2rem', width: '250px', height: '250px' }}>
             Login<br /><br />
             <div>
                 Username<br />
@@ -38,7 +39,8 @@ function Login(props) {
                 <input type="password" {...password} autoComplete="new-password" />
             </div>
             {error && <><small style={{ color: 'red' }}>{error}</small><br /></>}<br />
-            <input type="submit" value={loading ? 'Loading...' : 'Login'} onClick={handleLogin} disabled={loading} /><br />
+            <input type="submit" value={loading ? 'Loading...' : 'Login'}  disabled={loading} /><br />
+            </form>
         </div>
     );
 }
