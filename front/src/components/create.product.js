@@ -128,11 +128,14 @@ export default class CreateUser extends Component {
             .then((res) => {
                 console.log(res.data)
             }).catch((error) => {
-                console.log(error)
+                console.log(error.data)
             });
-
     }
-
+    // if (error.response.status === 409) {
+    //     alert("Doggie with same name exists!");
+    //   } else {
+    //     alert("Unknown error.");
+    //   }
 
     render() {
         return (
@@ -214,9 +217,7 @@ export default class CreateUser extends Component {
                         <input type="text" value={this.state.codePlu} onChange={this.onChangeUserCodePLU} placeholder={"CodePlu"} className="form-control" style={{ width: '100px' }} />
                     </div>
                     <div>
-                        <button type="primary" onClick={this.openNotification}>
                             <input type="submit" value="Send" className="btn btn-success btn-block" style={{ width: '100px' }} />
-                        </button>
                     </div>
                 </form>
             </div>

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import { removeUserSession } from '../utils/common';
 import { Descriptions } from 'antd'
 
@@ -8,6 +8,17 @@ export default function home(props) {
         removeUserSession();
         props.history.push('/login');
     }
+
+    // useEffect(() => {
+    //     axios.get(`${process.env.REACT_APP_SERVER_URL}/users/create}`).then(response => {
+    //       setUserSession(response.data.token, response.data.user);
+    //       setAuthLoading(false);
+    //     }).catch(error => {
+    //       removeUserSession();
+    //       setAuthLoading(false);
+    //     });
+    //   }, []);
+
     return (
         <>
      <input type="button" onClick={handleLogout} value="Logout" />
