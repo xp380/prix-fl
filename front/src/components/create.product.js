@@ -144,7 +144,7 @@ export default class CreateUser extends Component {
                         </span>
                     </div>
                     <div className="form-group">
-                        <select onChange={this.onChangeUserOrigine} style={{ width: "100px" }} >
+                        <select onChange={this.onChangeUserOrigine} style={{ width: "100px" }} required >
                             <option value="">Origine</option>
                             <option value="FR">FR</option>
                             <option value="EN">EN</option>
@@ -178,6 +178,7 @@ export default class CreateUser extends Component {
                             <option value="L'unité">L'unité</option>
                             <option value="1.220 kg">1.220 kg</option>
                             <option value="400 g">400 g</option>
+                            <option value="kg">kg</option>
                         </select>
                     </div>
                     <div className="form-group">

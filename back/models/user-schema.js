@@ -12,7 +12,6 @@ let userSchema = new Schema({
     },
     origine: {
         type: String,
-        required: true,
     },
     cat: {
         type: String
