@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { DatePicker, Popover, notification } from "antd";
+import { DatePicker, Popover } from "antd";
 import moment from 'moment';
 
+import { NotificationManager } from 'react-notifications';
 
 export default class CreateUser extends Component {
     constructor(props) {
@@ -22,7 +23,6 @@ export default class CreateUser extends Component {
         this.onChangeUserVille = this.onChangeUserVille.bind(this);
         this.onChangeUserCodePostal = this.onChangeUserCodePostal.bind(this);
         this.onChangeUserLogo = this.onChangeUserLogo.bind(this);
-        this.openNotification = this.openNotification.bind(this);
 
         this.onSubmit = this.onSubmit.bind(this);
 
@@ -93,15 +93,6 @@ export default class CreateUser extends Component {
         this.setState({ codePostal: e.target.value })
     }
 
-    openNotification = () => {
-        notification.open({
-            description:
-                'Donnée envoyée',
-            onClick: () => {
-                console.log('Notification Clicked!');
-            },
-        });
-    };
 
     onSubmit(e) {
         e.preventDefault()
@@ -124,19 +115,15 @@ export default class CreateUser extends Component {
             codePostal: this.props.codePostal
         };
 
-        axios.post(`${process.env.REACT_APP_SERVER_URL}/users/create`, userObject)
+        axios
+            .post(`${process.env.REACT_APP_SERVER_URL}/users/create`, userObject)
             .then((res) => {
-                console.log(res.data)
-            }).catch((error) => {
-                console.log(error.data)
-            });
-    }
-    // if (error.response.status === 409) {
-    //     alert("Doggie with same name exists!");
-    //   } else {
-    //     alert("Unknown error.");
-    //   }
-
+            NotificationManager.success('You have added a new product!', 'Successful!', 2000);
+        })
+            .catch((err) => {
+            NotificationManager.error('Error while Creating new product!', 'Error!', 500);
+   });
+}
     render() {
         return (
             <div className="wrapper">
@@ -153,11 +140,11 @@ export default class CreateUser extends Component {
                     <div className="form-group">
                         <label for="test" style={{ float: 'left' }}>€</label>
                         <span style={{ display: 'block', overflow: 'hidden', padding: '5px 4px 3px 6px' }}>
-                            <input type="text" value={this.state.prix} onChange={this.onChangeUserPrix} placeholder={"1"} className="form-control" style={{ width: '90px' }} required />
+                            <input type="text" value={this.state.prix} onChange={this.onChangeUserPrix} placeholder={"1"} className="form-control" style={{ width: '90px' }}  />
                         </span>
                     </div>
                     <div className="form-group">
-                        <select onChange={this.onChangeUserOrigine} style={{ width: "100px" }} required>
+                        <select onChange={this.onChangeUserOrigine} style={{ width: "100px" }} >
                             <option value="">Origine</option>
                             <option value="FR">FR</option>
                             <option value="EN">EN</option>

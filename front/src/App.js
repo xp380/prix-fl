@@ -3,7 +3,8 @@ import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter as Router, Switch, Link } from "react-router-dom";
 import axios from 'axios';
 import { Menu } from 'antd';
-
+import 'react-notifications/lib/notifications.css';
+import { NotificationContainer } from 'react-notifications';
 
 import './App.css'
 
@@ -90,6 +91,7 @@ function App() {
         </div>
       </div>
     </div>
+    <NotificationContainer />
   </Router >
   );
 }

@@ -7,10 +7,12 @@ let userSchema = new Schema({
         type: String
     },
     prix: {
-        type: Number
+        type: Number,
+        required: true
     },
     origine: {
-        type: String
+        type: String,
+        required: true,
     },
     cat: {
         type: String
