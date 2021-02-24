@@ -8,7 +8,7 @@ const utils = require('./utils');
 const jwt = require('jsonwebtoken');
 let database = require('./database/db');
 
-
+const priceRoute = require('../back/routes/price.routes')
 const userRoute = require('../back/routes/user.routes')
 const businessRoute = require('../back/routes/business.routes')
 
@@ -44,6 +44,7 @@ app.use('/login', (req, res) => {
         token: 'test123'
     });
 });
+app.use('/countprices', priceRoute)
 app.use('/users', userRoute)
 app.use('/businesses', businessRoute)
 
@@ -80,6 +81,9 @@ app.get('/', (req, res) => {
     res.send('Welcome to the Node.js Tutorial! - ' + req.user.name);
 });
 
+app.get('/countshops', (req, res) => {
+    res.send('Welcome to the Node.js Tutorial! - ');
+});
 
 // validate the user credentials
 app.post('/users/signin', function (req, res) {
@@ -110,26 +114,6 @@ app.post('/users/signin', function (req, res) {
     return res.json({ user: userObj, token });
 });
 
-
-// app.get('/test', function (req, res) { 
-//     mongoose.connect(database.db, {
-//     var collection = db.collection('users');
-//     collection.find().toArray(function(err, docs) {
-//       return res.send(docs);
-//     }); 
-// })
-// });
-
-// mongoose.connect(database.db, {
-//     useNewUrlParser: true,
-//     useUnifiedTopology: true
-// }).then(() => {
-//     console.log('Database connected sucessfully !')
-// },
-//     error => {
-//         console.log('Database could not be connected : ' + error)
-//     }
-// )
 
 // verify the token and return it if it's valid
 app.get('/verifyToken', function (req, res) {
