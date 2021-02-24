@@ -111,6 +111,26 @@ app.post('/users/signin', function (req, res) {
 });
 
 
+// app.get('/test', function (req, res) { 
+//     mongoose.connect(database.db, {
+//     var collection = db.collection('users');
+//     collection.find().toArray(function(err, docs) {
+//       return res.send(docs);
+//     }); 
+// })
+// });
+
+// mongoose.connect(database.db, {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true
+// }).then(() => {
+//     console.log('Database connected sucessfully !')
+// },
+//     error => {
+//         console.log('Database could not be connected : ' + error)
+//     }
+// )
+
 // verify the token and return it if it's valid
 app.get('/verifyToken', function (req, res) {
     // check header or url parameters or post parameters for token

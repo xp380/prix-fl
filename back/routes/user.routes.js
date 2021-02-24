@@ -16,7 +16,8 @@ router.route('/create').post((req, res, next) => {
 });
 
 router.route('/').get((req, res) => {
-    user.find((error, data) => {
+    user.find({}, null, {sort: {'_id': -1}},(error, data) => {
+        // user.sort({_id: 1},(error, data) => {
         if (error) {
             return next(error)
         } else {

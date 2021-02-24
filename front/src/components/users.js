@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import DataTable from './data-table';
 import { BackTop } from 'antd'
-// import _, { sortBy } from 'lodash'
 
 export default class Users extends Component {
 
