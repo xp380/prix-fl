@@ -55,7 +55,7 @@ router.route('/systemu').get((req, res) => {
 })
 
 router.route('/intermarche').get((req, res) => {
-    user.count({entite: "Intermarche"}, (err, data) =>{
+    user.count({entite: "Intermarché"}, (err, data) =>{
         if (err) {
             return next(error)
         } else {
