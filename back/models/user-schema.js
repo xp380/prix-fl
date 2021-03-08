@@ -47,7 +47,8 @@ let userSchema = new Schema({
         type: String
     },
     logo: {
-        type: String
+        type: String,
+        image: Buffer
     },
 }, {
     collection: 'users'

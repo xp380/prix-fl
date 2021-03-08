@@ -49,33 +49,13 @@ function App() {
           <Link className="nav-link" to={"/"}> Homepage</Link>
           </Menu.Item>
         <Menu.Item key="app"  >
-          <Link className="nav-link" to={"/prices"}>Products List</Link>
+          <Link className="nav-link" to={"/prices"}>Prices List</Link>
         </Menu.Item>
         <Menu.Item key="alipay">
            <Link className="nav-link" to={"/duplicate"}>Formulaires à remplir</Link>
         </Menu.Item>
       </Menu>
-
-      {/* <header>
-        <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
-          <p className="navbar-brand">Prix-FL</p>
-          <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul className="navbar-nav ml-auto">
-              <li className="nav-item active">
-                <Link className="nav-link" to={"/"}> Homepage</Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to={"/prices"}>Products List</Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to={"/duplicate"}>Formulaires à remplir</Link>
-              </li>
-            </ul>
-          </div>
-        </nav>
-      </header> */}
-
-      <div className="container">
+      <div className="container" style={{  marginRight:'0px', marginLeft:'0px'}}>
         <div className="row">
           <div className="col-md-12">
             <Switch>
@@ -85,8 +65,6 @@ function App() {
               {/* <PrivateRoute path="/businesses" component={Businesses} /> */}
               <PrivateRoute path="/duplicate" component={Duplicate} />
             </Switch>
-            <p style={{ display: "flex", flexwrap: "wrap", padding: "10px", margin: '0 10px' }} >
-            </p>
           </div>
         </div>
       </div>

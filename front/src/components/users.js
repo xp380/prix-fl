@@ -28,12 +28,12 @@ export default class Users extends Component {
 
     render() {
         return (
-            <div className="wrapper-users">
-                <div className="container" >
+            <div className="wrapper-users" style={{marginRight: "0px",  paddingRight:"1px"}}>
+                <div className="container">
                     <table className="table table-striped table-dark">
                         <thead className="thead-dark">
                             <tr>
-                                <td>ID </td>
+                                <td>LOGO</td>
                                 <td>Promo</td>
                                 <td>Prix</td>
                                 <td>Origine</td>
@@ -48,7 +48,7 @@ export default class Users extends Component {
                                 <td>ADRESSE</td>
                                 <td>VILLE</td>
                                 <td>CODEPOSTAL</td>
-                                <td>LOGO</td>
+                                <td>ID</td>
                             </tr>
                         </thead>
                         <tbody>

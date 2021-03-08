@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { DatePicker, Popover } from "antd";
+import { DatePicker, Popover, Tooltip, } from "antd";
 import moment from 'moment';
+import data from './products-pluplus.json';
 
 import { NotificationManager } from 'react-notifications';
 
+console.log(data)
 export default class CreateUser extends Component {
     constructor(props) {
         super(props)
+        this.onChangeUserRedirect = this.onChangeUserRedirect.bind(this);
         this.onChangeUserPromo = this.onChangeUserPromo.bind(this);
         this.onChangeUserPrix = this.onChangeUserPrix.bind(this);
         this.onChangeUserOrigine = this.onChangeUserOrigine.bind(this);
@@ -22,12 +25,14 @@ export default class CreateUser extends Component {
         this.onChangeUserAdresse = this.onChangeUserAdresse.bind(this);
         this.onChangeUserVille = this.onChangeUserVille.bind(this);
         this.onChangeUserCodePostal = this.onChangeUserCodePostal.bind(this);
+        this.onChangeUserLocation = this.onChangeUserLocation.bind(this);
         this.onChangeUserLogo = this.onChangeUserLogo.bind(this);
 
         this.onSubmit = this.onSubmit.bind(this);
 
-        
+
         this.state = {
+            redirect: '',
             promo: false,
             prix: "",
             origine: '',
@@ -42,11 +47,16 @@ export default class CreateUser extends Component {
             logo: "",
             adresse: "",
             ville: "",
+            location: "",
             codePostal: "",
             notification: '',
         }
     }
 
+
+    onChangeUserRedirect(e) {
+        this.setState({ redirect: e.target.value })
+    }
     onChangeUserPromo(e) {
         this.setState({ promo: e.target.checked })
     }
@@ -81,7 +91,8 @@ export default class CreateUser extends Component {
         this.setState({ entite: e.target.value })
     }
     onChangeUserLogo(e) {
-        this.setState({ logo: e.target.value })
+        // this.setState({ logo: e.target.value })
+        this.setState({ logo: URL.createcreateObjectURL(e.target.files[0]) })
     }
     onChangeUserAdresse(e) {
         this.setState({ adresse: e.target.value })
@@ -92,11 +103,15 @@ export default class CreateUser extends Component {
     onChangeUserCodePostal(e) {
         this.setState({ codePostal: e.target.value })
     }
-
+    onChangeUserLocation(e) {
+        this.setState({ location: e.target.value })
+    }
 
     onSubmit(e) {
-        e.preventDefault()
+        e.preventDefault();
+        e.target.reset()
         const userObject = {
+            redirect: this.props.redirect,
             promo: this.state.promo,
             prix: this.state.prix,
             origine: this.state.origine,
@@ -112,35 +127,38 @@ export default class CreateUser extends Component {
             logo: this.props.logo,
             adresse: this.props.adresse,
             ville: this.props.ville,
-            codePostal: this.props.codePostal
+            codePostal: this.props.codePostal,
+            location: this.props.location
         };
 
         axios
             .post(`${process.env.REACT_APP_SERVER_URL}/users/create`, userObject)
             .then((res) => {
-            NotificationManager.success('You have added a new product!', 'Successful!', 2000);
-        })
+                NotificationManager.success('You have added a new product!', 'Successful!', 3000);
+            })
             .catch((err) => {
-            NotificationManager.error('Error while Creating new product!', 'Error!', 500);
-   });
-}
+                NotificationManager.error('Error while Creating new product!', 'Error!', 3000);
+            });
+    }
     render() {
         return (
-            <div className="wrapper">
+            <div >
                 <form onSubmit={this.onSubmit} style={{ padding: '1em', border: '2px solid #c1c1c1', marginTop: '2rem', width: '150px', height: 'auto' }}>
-                    <img className="circle-img" src={this.props.img} alt="avatar_img" />
+                    <Popover placement="bottom" content={this.props.location}>
+                        <a rel="noreferrer" href={this.props.redirect} target="_blank"><img className="circle-img" src={this.props.img} alt="avatar_img" /></a>
+                    </Popover>
                     <input type="hidden" value={this.props.logo} onChange={this.onChangeUserLogo} className="form-control" style={{ width: "100px" }} />
                     <input type="hidden" value={this.props.entite} onChange={this.onChangeUserEntite} className="form-control" style={{ width: "100px" }} />
                     <input type="hidden" value={this.props.adresse} onChange={this.onChangeUserAdresse} className="form-control" style={{ width: "100px" }} />
                     <input type="hidden" value={this.props.ville} onChange={this.onChangeUserVille} className="form-control" style={{ width: "100px" }} />
                     <input type="hidden" value={this.props.codePostal} onChange={this.onChangeUserCodePostal} className="form-control" style={{ width: "100px" }} />
-                    <Popover title='Promo'>
+                    <Tooltip title='Promo'>
                         <input type="checkbox" checked={this.state.promo} onChange={this.onChangeUserPromo} />
-                    </Popover>
+                    </Tooltip>
                     <div className="form-group">
-                        <label for="test" style={{ float: 'left' }}>€</label>
+                        <label for="test" style={{ float: 'left', paddingTop: "10px" }}>€</label>
                         <span style={{ display: 'block', overflow: 'hidden', padding: '5px 4px 3px 6px' }}>
-                            <input type="text" value={this.state.prix} onChange={this.onChangeUserPrix} placeholder={"1"} className="form-control" style={{ width: '90px' }}  />
+                            <input type="number" step={0.1} value={this.state.prix} onChange={this.onChangeUserPrix} placeholder={"1"} className="form-control" style={{ width: '90px' }} />
                         </span>
                     </div>
                     <div className="form-group">
@@ -188,13 +206,14 @@ export default class CreateUser extends Component {
                             onChange={this.onChangeUserDate}
                             format="YYYY-MM-DD"
                             placeholder="Date"
+                            style={{ width: 130 }}
                         />
                     </div>
                     <div className="form-group">
                         <input type="text" value={this.state.codeMag} onChange={this.onChangeUserCodeMagasin} placeholder={"CodeMag"} className="form-control" style={{ width: '100px' }} />
                     </div>
                     <div className="form-group">
-                        <select onChange={this.onChangeUserCodePLUPLUS} style={{ width: "120px" }}>
+                        <select onChange={this.onChangeUserCodePLUPLUS} style={{ width: "130px" }}>
                             <option value="">codePluPlus</option>
                             <option value="4986">4986</option>
                             <option value="4985">4985</option>
@@ -205,7 +224,8 @@ export default class CreateUser extends Component {
                         <input type="text" value={this.state.codePlu} onChange={this.onChangeUserCodePLU} placeholder={"CodePlu"} className="form-control" style={{ width: '100px' }} />
                     </div>
                     <div>
-                            <input type="submit" value="Send" className="btn btn-success btn-block" style={{ width: '100px' }} />
+                        {/* <input type="" value="Reset"/> */}
+                        <input type="submit" value="Send" className="btn btn-success btn-block" style={{ width: '100px' }} />
                     </div>
                 </form>
             </div>

@@ -81,8 +81,15 @@ app.get('/', (req, res) => {
     res.send('Welcome to the Node.js Tutorial! - ' + req.user.name);
 });
 
-app.get('/countshops', (req, res) => {
-    res.send('Welcome to the Node.js Tutorial! - ');
+app.get('/callApi', (req, res) => {
+    res.json({
+        price: "3.45",
+        productCode: "4333",
+        Zip: "95200",
+        concurrent_1: "2",
+        concurrent_2: "4",
+        autre_info_response: ""
+    });
 });
 
 // validate the user credentials

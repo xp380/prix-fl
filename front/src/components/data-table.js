@@ -5,7 +5,8 @@ class DataTable extends Component {
         return (
             <tr>
                 <td>
-                    {this.props.obj._id}
+                    <img src={this.props.obj.logo}>
+                    </img>
                 </td>
                 <td>
                     {this.props.obj.promo}
@@ -50,7 +51,7 @@ class DataTable extends Component {
                     {this.props.obj.codePostal}
                 </td>
                 <td>
-                    {this.props.obj.logo}
+                    {this.props.obj._id}
                 </td>
             </tr>
         );
