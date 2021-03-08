@@ -5,7 +5,7 @@ class DataTable extends Component {
         return (
             <tr>
                 <td>
-                    <img src={this.props.obj.logo}>
+                    <img src={this.props.obj.logo} alt="description">
                     </img>
                 </td>
                 <td>
