@@ -13,7 +13,7 @@ export default function Duplicate() {
             {/* <DataSearch /> */}
             <Tabs defaultActiveKey="1"  >
                 <TabPane tab="Carrefour" key="1" >
-                    <p style={{ display: "flex", flexwrap: "wrap", padding: "10px", margin: '0 100px' }} >
+                    <div style={{ display: "flex", flexwrap: "wrap", padding: "10px", margin: '0 100px' }} >
                         <CreateProduct
                             img={contacts[0].imgURL}
                             entite={contacts[0].entite}
@@ -57,10 +57,10 @@ export default function Duplicate() {
                             location={contacts[3].location}
 
                         />
-                    </p>
+                    </div>
                 </TabPane>
                 <TabPane tab="System U" key="2">
-                    <p style={{ display: "flex", flexwrap: "wrap", padding: "10px", margin: '0 100px' }} >
+                    <div style={{ display: "flex", flexwrap: "wrap", padding: "10px", margin: '0 100px' }} >
                         <CreateProduct
                             img={contacts[4].imgURL}
                             entite={contacts[4].entite}
@@ -105,10 +105,10 @@ export default function Duplicate() {
                             location={contacts[7].location}
 
                         />
-                    </p>
+                    </div>
                 </TabPane>
                 <TabPane tab="Intermarché super" key="3">
-                    <p style={{ display: "flex", flexwrap: "wrap", padding: "10px", margin: '0 100px' }} >
+                    <div style={{ display: "flex", flexwrap: "wrap", padding: "10px", margin: '0 100px' }} >
                         <CreateProduct
                             img={contacts[8].imgURL}
                             entite={contacts[8].entite}
@@ -131,10 +131,10 @@ export default function Duplicate() {
                             location={contacts[9].location}
 
                         />
-                    </p>
+                    </div>
                 </TabPane>
                 <TabPane tab="Auchan" key="4">
-                    <p style={{ display: "flex", flexwrap: "wrap", padding: "10px", margin: '0 100px' }} >
+                    <div style={{ display: "flex", flexwrap: "wrap", padding: "10px", margin: '0 100px' }} >
                         <CreateProduct
                             img={contacts[10].imgURL}
                             entite={contacts[10].entite}
@@ -179,10 +179,10 @@ export default function Duplicate() {
                             location={contacts[13].location}
 
                         />
-                    </p>
+                    </div>
                 </TabPane>
                 <TabPane tab="Franprix" key="5">
-                    <p style={{ display: "flex", flexwrap: "wrap", padding: "10px", margin: '0 100px' }} >
+                    <div style={{ display: "flex", flexwrap: "wrap", padding: "10px", margin: '0 100px' }} >
                         <CreateProduct
                             img={contacts[14].imgURL}
                             entite={contacts[14].entite}
@@ -193,10 +193,10 @@ export default function Duplicate() {
                             redirect={contacts[14].redirect}
 
                         />
-                    </p>
+                    </div>
                 </TabPane>
                 <TabPane tab="Monoprix" key="6">
-                    <p style={{ display: "flex", flexwrap: "wrap", padding: "10px", margin: '0 100px' }} >
+                    <div style={{ display: "flex", flexwrap: "wrap", padding: "10px", margin: '0 100px' }} >
                         <CreateProduct
                             img={contacts[15].imgURL}
                             entite={contacts[15].entite}
@@ -207,7 +207,7 @@ export default function Duplicate() {
                             redirect={contacts[15].redirect}
 
                         />
-                    </p>
+                    </div>
                 </TabPane>
             </Tabs>
         </>

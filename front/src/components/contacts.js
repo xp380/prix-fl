@@ -7,7 +7,8 @@ const contacts = [
         codePostal: "75016",
         location: "181 Avenue Victor Hugo 75016 Paris",
         logo: "https://www.coupvray.fr/wp-content/uploads/2018/04/1007px-Logo_Carrefour_Market.svg-Copie.png",
-        redirect: "https://www.google.fr/maps/place/Carrefour+Market+Paris+Lamartine/@48.8666267,2.2743682,17z/data=!3m1!4b1!4m5!3m4!1s0x47e66557b726a6c3:0xb0014e03a05a8144!8m2!3d48.8666267!4d2.2765569"
+        redirect: "https://www.google.fr/maps/place/Carrefour+Market+Paris+Lamartine/@48.8666267,2.2743682,17z/data=!3m1!4b1!4m5!3m4!1s0x47e66557b726a6c3:0xb0014e03a05a8144!8m2!3d48.8666267!4d2.2765569",
+
     },
     {
         imgURL: "https://www.coupvray.fr/wp-content/uploads/2018/04/1007px-Logo_Carrefour_Market.svg-Copie.png",

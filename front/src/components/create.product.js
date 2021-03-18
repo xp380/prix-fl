@@ -109,7 +109,7 @@ export default class CreateUser extends Component {
 
     onSubmit(e) {
         e.preventDefault();
-        e.target.reset()
+        e.target.reset();
         const userObject = {
             redirect: this.props.redirect,
             promo: this.state.promo,
@@ -156,9 +156,9 @@ export default class CreateUser extends Component {
                         <input type="checkbox" checked={this.state.promo} onChange={this.onChangeUserPromo} />
                     </Tooltip>
                     <div className="form-group">
-                        <label for="test" style={{ float: 'left', paddingTop: "10px" }}>€</label>
+                        <label htmlFor="test" style={{ float: 'left', paddingTop: "10px" }}>€</label>
                         <span style={{ display: 'block', overflow: 'hidden', padding: '5px 4px 3px 6px' }}>
-                            <input type="number" step={0.1} value={this.state.prix} onChange={this.onChangeUserPrix} placeholder={"1"} className="form-control" style={{ width: '90px' }} />
+                            <input type="number" step={0.1} value={this.prix} onChange={this.onChangeUserPrix} placeholder={"1"} className="form-control" style={{ width: '90px' }} />
                         </span>
                     </div>
                     <div className="form-group">
@@ -184,7 +184,7 @@ export default class CreateUser extends Component {
                         </select>
                     </div>
                     <div className="form-group">
-                        <input type="text" value={this.state.cal} onChange={this.onChangeUserCAL} placeholder={'CAL'} className="form-control" style={{ width: "100px" }} />
+                        <input type="text" value={this.cal} onChange={this.onChangeUserCAL} placeholder={'CAL'} className="form-control" style={{ width: "100px" }} />
                     </div>
                     <div className="form-group">
                         <select onChange={this.onChangeUserCOND} style={{ width: "100px" }}>
@@ -210,7 +210,7 @@ export default class CreateUser extends Component {
                         />
                     </div>
                     <div className="form-group">
-                        <input type="text" value={this.state.codeMag} onChange={this.onChangeUserCodeMagasin} placeholder={"CodeMag"} className="form-control" style={{ width: '100px' }} />
+                        <input type="text" value={this.codeMag} onChange={this.onChangeUserCodeMagasin} placeholder={"CodeMag"} className="form-control" style={{ width: '100px' }} />
                     </div>
                     <div className="form-group">
                         <select onChange={this.onChangeUserCodePLUPLUS} style={{ width: "130px" }}>
@@ -221,7 +221,7 @@ export default class CreateUser extends Component {
                         </select>
                     </div>
                     <div className="form-group">
-                        <input type="text" value={this.state.codePlu} onChange={this.onChangeUserCodePLU} placeholder={"CodePlu"} className="form-control" style={{ width: '100px' }} />
+                        <input type="text" value={this.codePlu} onChange={this.onChangeUserCodePLU} placeholder={"CodePlu"} className="form-control" style={{ width: '100px' }} />
                     </div>
                     <div>
                         {/* <input type="" value="Reset"/> */}
