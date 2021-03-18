@@ -23,7 +23,8 @@ let userSchema = new Schema({
         type: String
     },
     date: {
-        type: String
+        type: String,
+        // default: Date.now
     },
     codeMag: {
         type: String

@@ -74,5 +74,14 @@ router.route('/monoprix').get((req, res) => {
     })
 })
 
+router.route('/g20').get((req, res) => {
+    user.count({entite: "G20"}, (err, data) =>{
+        if (err) {
+            return next(error)
+        } else {
+            res.json(data)
+        }
+    })
+})
 
 module.exports = router;

@@ -224,7 +224,6 @@ export default class CreateUser extends Component {
                         <input type="text" value={this.codePlu} onChange={this.onChangeUserCodePLU} placeholder={"CodePlu"} className="form-control" style={{ width: '100px' }} />
                     </div>
                     <div>
-                        {/* <input type="" value="Reset"/> */}
                         <input type="submit" value="Send" className="btn btn-success btn-block" style={{ width: '100px' }} />
                     </div>
                 </form>

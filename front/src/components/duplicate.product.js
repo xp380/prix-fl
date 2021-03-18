@@ -209,6 +209,20 @@ export default function Duplicate() {
                         />
                     </div>
                 </TabPane>
+                <TabPane tab="G20" key="7">
+                    <div style={{ display: "flex", flexwrap: "wrap", padding: "10px", margin: '0 100px' }} >
+                        <CreateProduct
+                            img={contacts[16].imgURL}
+                            entite={contacts[16].entite}
+                            adresse={contacts[16].adresse}
+                            ville={contacts[16].ville}
+                            codePostal={contacts[16].codePostal}
+                            logo={contacts[16].logo}
+                            redirect={contacts[16].redirect}
+                            location={contacts[16].location}
+                        />
+                    </div>
+                </TabPane>
             </Tabs>
         </>
     )

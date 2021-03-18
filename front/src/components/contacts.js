@@ -165,6 +165,16 @@ const contacts = [
         codePostal: "",
         logo: "http://assets.stickpng.com/images/5a1c2d20f65d84088faf13c4.png"
     },
+    {
+        imgURL: "https://upload.wikimedia.org/wikipedia/fr/9/9a/Logo_Supermarch%C3%A9s_G20_%282011%29.svg",
+        entite: "G20",
+        adresse: "5, rue Eric de St-Sauveur",
+        ville: "Sarcelles",
+        location: "5 rue Eric de St-Sauveur 95200 Sarcelles",
+        codePostal: "95200",
+        logo: "https://upload.wikimedia.org/wikipedia/fr/9/9a/Logo_Supermarch%C3%A9s_G20_%282011%29.svg",
+        redirect: "https://www.google.com/maps/place/Supermarch%C3%A9+G20./@48.9771367,2.3867305,17z/data=!3m1!4b1!4m5!3m4!1s0x47e66a32a4606b9d:0xcc9ad9fc846ee00f!8m2!3d48.9771367!4d2.3889192"
+    }
 ];
 
 export default contacts;

@@ -1,6 +1,8 @@
+let moment = require('moment')
 let mongoose = require('mongoose'),
     express = require('express'),
     router = express.Router();
+
 
 let price = require('../models/user-schema');
 
@@ -79,28 +81,46 @@ router.route('/callAPI2').post(async (req, res)=> {
         }
        
 })
-router.route('/callPrices').post(async (req, res)=> {
+router.route('/callAPI3').post(async (req, res)=> {
    
     if( !req.body.zip || !req.body.codePlu  ){
         res.json({ message: "Bad Request parameters missing",  codePostal: req.body.codePostal, CodePlu: req.body.codePlu, prix: req.body.prix, adresse: req.body.adresse });
     }
     else{
          //1. recuperation des donnes en DB
-        let pricesList = await price.find({ codePostal: req.body.zip, codePluPlus: req.body.codePlu})
+
+        let pricesList = await price.find({ codePostal: req.body.zip, codePluPlus: req.body.codePlu,
+           date: 
+           { 
+             $lt: ('2021-03-19T16:00:00.000Z'),
+             $gte: ('2021-03-16T16:00:00.000Z') 
+            
+           }
+        //    { $gte:("2021-03-17")}
+            // db.order.find({"OrderDateTime":{ $gte:ISODate("2019-02-10"), $lt:ISODate("2019-02-21") }
+        })
+        
+        
+
         //2. debut de boucle
         
         let sum = 0;
         let count = pricesList.length;
         pricesList.map(({prix}) => sum += prix)
+        max = Math.max(...pricesList.map(({prix}) => prix))
+        min = Math.min(...pricesList.map(({prix}) => prix))
 
         //3. remplissage d'un nouvel objet (au format de response attendu)
 
         const newResultPrices = {
                 price: sum/count,
+                maxPrice: max,
+                minPrice: min,
                 nbProd : count,
                 codePlu: req.body.codePlu,
                 zip: req.body.zip,
-                // produit_1:
+                productsList: pricesList,
+                productsDrive: "none"
             };
 
         console.log(newResultPrices);

@@ -12,6 +12,7 @@ export default function Home(props) {
     const [auchan, setAuchan] = useState([])
     const [franprix, setFranprix] = useState([])
     const [monoprix, setMonoprix] = useState([])
+    const [G20, setG20] = useState([])
     // const [prices, setPrice ] = useState([])
     const handleLogout = () => {
         removeUserSession();
@@ -109,6 +110,18 @@ export default function Home(props) {
     useEffect(() => fetchMonoprix(), [fetchMonoprix]);
     console.log(monoprix);
 
+    const fetchG20 = useCallback(async () => {
+        try {
+            const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/countprices/g20`);
+            setG20(
+                res.data
+            );
+        } catch (e) {
+            console.warn(e);
+        }
+    }, [])
+    useEffect(() => fetchG20(), [fetchG20]);
+    console.log(G20);
 
     return (
         <>
@@ -121,6 +134,7 @@ export default function Home(props) {
                 <Descriptions.Item label="Auchan">{auchan}</Descriptions.Item>
                 <Descriptions.Item label="Franprix">{franprix}</Descriptions.Item>
                 <Descriptions.Item label="Monoprix">{monoprix}</Descriptions.Item>
+                <Descriptions.Item label="G20">{G20}</Descriptions.Item>
             </Descriptions>
         </>
     )
