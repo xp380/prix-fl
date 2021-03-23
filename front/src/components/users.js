@@ -11,7 +11,7 @@ export default class Users extends Component {
     }
 
     componentDidMount() {
-        axios.get(`${process.env.REACT_APP_SERVER_URL}/users`)
+        axios.get(`${process.env.REACT_APP_SERVER_URL}/prices`)
             .then(res => {
                 this.setState({ usersCollection: res.data });
             })
