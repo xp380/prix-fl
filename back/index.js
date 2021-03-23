@@ -47,7 +47,7 @@ app.use('/login', (req, res) => {
     });
 });
 app.use('/countprices', priceRoute)
-app.use('/users', userRoute)
+app.use('/', userRoute)
 app.use('/businesses', businessRoute)
 
 const port = process.env.PORT || 4000;

@@ -1,11 +1,11 @@
 let mongoose = require('mongoose');
 express = require('express'),
-router = express.Router();
+    router = express.Router();
 
-let user = require('../models/user-schema');
+let store = require('../models/user-schema');
 
 router.route('/').get((req, res) => {
-    user.count({ }, (error, data) => {
+    store.count({}, (error, data) => {
         if (error) {
             return next(error)
         } else {
@@ -15,7 +15,7 @@ router.route('/').get((req, res) => {
 })
 
 router.route('/carrefour').get((req, res) => {
-    user.count({entite: "Carrefour"}, (err, data) =>{
+    store.count({ entite: "Carrefour" }, (err, data) => {
         if (err) {
             return next(error)
         } else {
@@ -25,7 +25,7 @@ router.route('/carrefour').get((req, res) => {
 })
 
 router.route('/auchan').get((req, res) => {
-    user.count({entite: "Auchan"}, (err, data) =>{
+    store.count({ entite: "Auchan" }, (err, data) => {
         if (err) {
             return next(error)
         } else {
@@ -35,7 +35,7 @@ router.route('/auchan').get((req, res) => {
 })
 
 router.route('/franprix').get((req, res) => {
-    user.count({entite: "Franprix"}, (err, data) =>{
+    store.count({ entite: "Franprix" }, (err, data) => {
         if (err) {
             return next(error)
         } else {
@@ -45,7 +45,7 @@ router.route('/franprix').get((req, res) => {
 })
 
 router.route('/systemu').get((req, res) => {
-    user.count({entite: "System U"}, (err, data) =>{
+    store.count({ entite: "System U" }, (err, data) => {
         if (err) {
             return next(error)
         } else {
@@ -55,7 +55,7 @@ router.route('/systemu').get((req, res) => {
 })
 
 router.route('/intermarche').get((req, res) => {
-    user.count({entite: "Intermarché"}, (err, data) =>{
+    store.count({ entite: "Intermarché" }, (err, data) => {
         if (err) {
             return next(error)
         } else {
@@ -65,7 +65,7 @@ router.route('/intermarche').get((req, res) => {
 })
 
 router.route('/monoprix').get((req, res) => {
-    user.count({entite: "Monoprix"}, (err, data) =>{
+    store.count({ entite: "Monoprix" }, (err, data) => {
         if (err) {
             return next(error)
         } else {
@@ -75,7 +75,7 @@ router.route('/monoprix').get((req, res) => {
 })
 
 router.route('/g20').get((req, res) => {
-    user.count({entite: "G20"}, (err, data) =>{
+    store.count({ entite: "G20" }, (err, data) => {
         if (err) {
             return next(error)
         } else {

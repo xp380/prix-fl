@@ -132,7 +132,7 @@ export default class CreateUser extends Component {
         };
 
         axios
-            .post(`${process.env.REACT_APP_SERVER_URL}/users/create`, userObject)
+            .post(`${process.env.REACT_APP_SERVER_URL}/create`, userObject)
             .then((res) => {
                 NotificationManager.success('You have added a new product!', 'Successful!', 3000);
             })
