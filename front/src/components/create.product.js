@@ -132,7 +132,7 @@ export default class CreateUser extends Component {
         };
 
         axios
-            .post(`${process.env.REACT_APP_SERVER_URL}/users/create`, userObject)
+            .post(`${process.env.REACT_APP_SERVER_URL}/prices/create`, userObject)
             .then((res) => {
                 NotificationManager.success('You have added a new product!', 'Successful!', 3000);
             })
@@ -158,7 +158,7 @@ export default class CreateUser extends Component {
                     <div className="form-group">
                         <label htmlFor="test" style={{ float: 'left', paddingTop: "10px" }}>€</label>
                         <span style={{ display: 'block', overflow: 'hidden', padding: '5px 4px 3px 6px' }}>
-                            <input type="number" step={0.1} value={this.prix} onChange={this.onChangeUserPrix} placeholder={"1"} className="form-control" style={{ width: '90px' }} />
+                            <input type="number" step={0.01} value={this.prix} onChange={this.onChangeUserPrix} placeholder={"1"} className="form-control" style={{ width: '90px' }} />
                         </span>
                     </div>
                     <div className="form-group">
@@ -213,12 +213,13 @@ export default class CreateUser extends Component {
                         <input type="text" value={this.codeMag} onChange={this.onChangeUserCodeMagasin} placeholder={"CodeMag"} className="form-control" style={{ width: '100px' }} />
                     </div>
                     <div className="form-group">
-                        <select onChange={this.onChangeUserCodePLUPLUS} style={{ width: "130px" }}>
+                        {/* <select onChange={this.onChangeUserCodePLUPLUS} style={{ width: "130px" }}>
                             <option value="">codePluPlus</option>
                             <option value="4986">4986</option>
                             <option value="4985">4985</option>
                             <option value="4984">4984</option>
-                        </select>
+                        </select> */}
+                        <input type="text" value={this.codePluPlus} onChange={this.onChangeUserCodePLUPLUS} placeholder={"CodePluPlus"} className="form-control" style={{ width: '130px' }} />
                     </div>
                     <div className="form-group">
                         <input type="text" value={this.codePlu} onChange={this.onChangeUserCodePLU} placeholder={"CodePlu"} className="form-control" style={{ width: '100px' }} />

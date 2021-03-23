@@ -11,7 +11,7 @@ export default class Users extends Component {
     }
 
     componentDidMount() {
-        axios.get(`${process.env.REACT_APP_SERVER_URL}/users`)
+        axios.get(`${process.env.REACT_APP_SERVER_URL}/prices`)
             .then(res => {
                 this.setState({ usersCollection: res.data });
             })
@@ -28,7 +28,7 @@ export default class Users extends Component {
 
     render() {
         return (
-            <div className="wrapper-users" style={{marginRight: "0px",  paddingRight:"1px"}}>
+            <div className="wrapper-users" style={{ marginRight: "0px", paddingRight: "1px" }}>
                 <div className="container">
                     <table className="table table-striped table-dark">
                         <thead className="thead-dark">

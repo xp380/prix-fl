@@ -4,6 +4,7 @@ let express = require('express');
 let mongoose = require('mongoose');
 let cors = require('cors');
 let bodyParser = require('body-parser');
+let morgan = require('morgan');
 const utils = require('./utils');
 const jwt = require('jsonwebtoken');
 let database = require('./database/db');
@@ -35,6 +36,8 @@ const userData = {
     isAdmin: true
 };
 
+
+app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: true
@@ -46,7 +49,7 @@ app.use('/login', (req, res) => {
     });
 });
 app.use('/countprices', priceRoute)
-app.use('/users', userRoute)
+app.use('/prices', userRoute)
 app.use('/businesses', businessRoute)
 
 const port = process.env.PORT || 4000;
@@ -82,17 +85,6 @@ app.get('/', (req, res) => {
     res.send('Welcome to the Node.js Tutorial! - ' + req.user.name);
 });
 
-// app.get('/callApi', (req, res) => {
-//     res.json({
-//         price: "3.45",
-//         productCode: "4333",
-//         Zip: "95200",
-//         concurrent_1: "2",
-//         concurrent_2: "4",
-//         autre_info_response: ""
-//     });
-// });
-
 
 // validate the user credentials
 app.post('/users/signin', function (req, res) {
@@ -123,7 +115,6 @@ app.post('/users/signin', function (req, res) {
     return res.json({ user: userObj, token });
 });
 
-
 // verify the token and return it if it's valid
 app.get('/verifyToken', function (req, res) {
     // check header or url parameters or post parameters for token
@@ -153,6 +144,7 @@ app.get('/verifyToken', function (req, res) {
         return res.json({ user: userObj, token });
     });
 });
+
 
 app.use(function (err, req, res, next) {
     console.error(err.message);

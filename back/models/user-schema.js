@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 let userSchema = new Schema({
-
     promo: {
         type: String
     },
@@ -23,7 +22,8 @@ let userSchema = new Schema({
         type: String
     },
     date: {
-        type: String,
+        type: String
+        // type: Date,
         // default: Date.now
     },
     codeMag: {
