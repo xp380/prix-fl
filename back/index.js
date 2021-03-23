@@ -4,7 +4,6 @@ let express = require('express');
 let mongoose = require('mongoose');
 let cors = require('cors');
 let bodyParser = require('body-parser');
-let morgan = require('morgan');
 const utils = require('./utils');
 const jwt = require('jsonwebtoken');
 let database = require('./database/db');
@@ -37,7 +36,6 @@ const userData = {
 };
 
 
-app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: true
@@ -49,7 +47,7 @@ app.use('/login', (req, res) => {
     });
 });
 app.use('/countprices', priceRoute)
-app.use('/prices', userRoute)
+app.use('/users', userRoute)
 app.use('/businesses', businessRoute)
 
 const port = process.env.PORT || 4000;
