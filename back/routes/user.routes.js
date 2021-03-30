@@ -4,6 +4,7 @@ let mongoose = require('mongoose'),
 
 
 let price = require('../models/user-schema');
+let rungis = require('../models/rungis-schema')
 
 router.route('/create').post((req, res, next) => {
     price.create(req.body, (error, data) => {
@@ -31,7 +32,7 @@ router.route('/callAPI').post(async (req, res) => {
 
     if (!req.body.zip || !req.body.codePlu || req.body.token !== "7863UYBJ3GIJD853IUDI0I0X082") {
 
-        res.json({ message: "Bad Request parameters missing", codePostal: req.body.codePostal, CodePlu: req.body.codePlu, prix: req.body.prix, adresse: req.body.adresse });
+        res.json({ message: "Bad Request parameters missing", codePostal: req.body.codePostal, codePlu: req.body.codePlu, prix: req.body.prix, adresse: req.body.adresse });
     }
     else {
         let critere = await
@@ -44,13 +45,13 @@ router.route('/callAPI').post(async (req, res) => {
     }
 })
 
-router.route('/callAPI2').post(async (req, res) => {
+
+router.route('/api/callAPI2').post(async (req, res) => {
 
     if (!req.body.zip || !req.body.codePlu || req.body.token !== "7863UYBJ3GIJD853IUDI0I0X082") {
         res.json({ message: "Bad Request parameters missing", codePostal: req.body.codePostal, CodePlu: req.body.codePlu, prix: req.body.prix, adresse: req.body.adresse });
     }
     else {
-        let pricesList = await price.find({ codePostal: req.body.zip, codePluPlus: req.body.codePlu })
         // let newResult = []
         // var sum = 0    
         // for(var i = 0; i < pricesList.length; i++)
@@ -102,7 +103,7 @@ router.route('/api/getPrice/').post(async (req, res) => {
             $where: function () {
 
                 today = new Date(); //
-                today.setDate(today.getDate() - 1)
+                today.setDate(today.getDate() - 10) //Réglez le chiffre pour calculer la date
                 today.setTime(today.getTime() - today.getHours() * 3600 * 1000 - today.getMinutes() * 60 * 1000);
                 return (this._id.getTimestamp() >= today)
             }
@@ -131,7 +132,6 @@ router.route('/api/getPrice/').post(async (req, res) => {
         //3. remplissage d'un nouvel objet (au format de response attendu)
 
         const newResultPrices = {
-            // price: (sum / count).toFixed(2),
             price: Math.round((sum / count) * 100) / 100,
             maxPrice: max,
             minPrice: min,
@@ -179,6 +179,199 @@ router.route('/api/getPrice/').post(async (req, res) => {
         res.status(200).send("prices called")
     }
 })
+  
+router.route('/api/getRungis/').post(async (req, res) => {
+    if (!req.body.zip ||!req.body.libelle || !req.body.codePlu  || req.body.token !== "7863UYBJ3GIJD853IUDI0I0X082"
+    // || !req.body.weightStore || !res.body.weightSupplierPrice
+    ) {
+        res.json({ message: "Bad Request parameters missing", codePostal: req.body.codePostal, CodePlu: req.body.codePlu, prix: req.body.prix, adresse: req.body.adresse });
+    }
+    else {
+        
+        let pricesList = await price
+        .find({
+            codePostal: req.body.zip, codePluPlus: req.body.codePlu,
+            $where: function () {
+                today = new Date(); //
+                today.setDate(today.getDate() - 10) //Réglez le chiffre pour calculer la date
+                today.setTime(today.getTime() - today.getHours() * 3600 * 1000 - today.getMinutes() * 60 * 1000);
+                return (this._id.getTimestamp() >= today)
+            }
+        })
+        // .limit(1)
+        let priceRungis = await rungis
+        .find({ 
+            libelle: req.body.libelle, 
+            // weightStore: req.body.weightStore, weightSupplierPrice: req.body.weightSupplierPrice,
+            $where: function () {
+                today = new Date(); //
+                today.setDate(today.getDate() - 1) //Réglez le chiffre pour calculer la date
+                today.setTime(today.getTime() - today.getHours() * 3600 * 1000 - today.getMinutes() * 60 * 1000);
+                return (this._id.getTimestamp() >= today)
+            }
+        })
+        
+        let sum = 0;
+        let countRungis = priceRungis.length;
+        let countProduct = pricesList.length;
+        let count = pricesList.length + priceRungis.length;
+        pricesList.map(({ prix }) => sum += prix)
+        priceRungis.map(({ prix_maxi }) => sum += prix_maxi)
+        max = Math.max(...pricesList.map(({ prix }) => prix))
+        min = Math.min(...pricesList.map(({ prix }) => prix))
+
+        const newResultPrices = {
+            price: Math.round((sum  / count) * 100) / 100,
+            maxPrice: max,
+            minPrice: min,
+            nbRungis: countRungis,
+            nbProd: countProduct,
+            codePlu: req.body.codePlu,
+            zip: req.body.zip,
+            libelle: req.body.libelle,
+            prixMinRungis: priceRungis,
+            productsList: pricesList,
+            productsDrive: "none",
+        };
+
+    //    response expected = {
+    //         ""price"": 3.45,
+    //         ""productCode"": ""4333"",
+    //         ""Zip"": ""95200"",
+    //         ""prixMinRungis"": {
+    //              ""productCode"": ""3421"",
+    //              ""productName"": ""Tomate ronde cagette"",
+    //              ""productPrice"": 1.5,
+    //          },
+    //         ""concurrent_1"": {
+    //              ""productCode"": ""6633"",
+    //              ""productName"": ""Tomate ronde des sables"",  
+    //              ""productPrice"": 3.45,
+    //              ""horaire"": 10,
+    //              ""ecart"": 950,
+    //              ""anciennete"": 24,
+    //          },
+    //         ""concurrent_2"": {
+    //              ""productCode"":  ""6632"",    
+    //              ""productName"": ""Tomate ronde vrac"",  
+    //              ""productPrice"": 1.5,
+    //              ""horaire"": 9,
+    //              ""ecart"": 800,
+    //              ""anciennete"": 60,
+    //          }, 
+    //         ""prixDrive"": {
+    //              ""productCode"": ""3421"",
+    //              ""productName"": ""Tomate ronde cagette"",
+    //              ""productPrice_today"": 1.5,  
+    //              ""productPrice_yesterday"": 1.70, 
+    //              ""productNew"": ""Tomate cerise allongée"",
+    //              ""productPrice_New"": 0.99,
+    //          },
+    //         ""autre_info_reponse"": """"
+    // }
+
+        console.log(newResultPrices);
+
+        
+        res.json(newResultPrices);
+        res.status(200).send("prices called")
+    }
+})
+
+router.route('/api/rungis/').post(async (req, res) => {
+    if (!req.body.zip || !req.body.codePlu || !req.body.libelle || req.body.token !== "7863UYBJ3GIJD853IUDI0I0X082") {
+        res.json({ message: "Bad Request parameters missing", libelle: req.body.libelle, codePostal: req.body.codePostal, CodePlu: req.body.codePlu, prix: req.body.prix, adresse: req.body.adresse });
+    }
+    else {
+        let today = new Date(); //
+        today.setDate(today.getDate() - 5) //Réglez le chiffre pour calculer la date
+        today.setTime(today.getTime() - today.getHours() * 3600 * 1000 - today.getMinutes() * 60 * 1000);
+        // return (this._id.getTimestamp() >= today)
+
+        let PricesRungis = await price.aggregate([
+
+            { $match: { codePostal: req.body.zip, codePluPlus: req.body.codePlu, } },
+            // {
+            //     $group: {
+            //         _id: null,
+            //         price: { $avg: "$prix" }, nbProd: { $sum: 1 }, maxPrice: { $max: '$prix' }, minPrice: { $min: '$prix' },
+            //     },
+
+            //     // $group: {
+            //     //     _id: {
+            //     //         "id": "$_id"
+            //     //     }
+            //     // }
+            // },
+            // { $project: { _id: -1, zip: req.body.zip, codePlu: req.body.codePlu, price: { $round: ["$price", 2] }, "nbProd": 1, "maxPrice": 1, "minPrice": 1, } },
+            {
+                $lookup: {
+                    from: 'prixMinRungis', localField: 'prix_mini',
+                    foreignField: 'codePluPlus', as: 'myCustomResut'
+                }
+            },
+            // {
+            //     $lookup: {
+            //         from: 'users', localField: 'prix_mini',
+            //         foreignField: 'codePlusPlus ', as: 'productsList'
+            //     }
+            // },
+            {
+                $unwind: '$myCustomResut'
+            },
+            {
+                $group: {
+                    _id: null,
+                    price: { $avg: "$prix" }, nbProd: { $sum: 1 }, maxPrice: { $max: '$prix' }, minPrice: { $min: '$prix' },
+                },
+            },
+            { $project: { _id: -1, zip: req.body.zip, codePlu: req.body.codePlu, price: { $round: ["$price", 2] }, "nbProd": 1, "maxPrice": 1, "minPrice": 1, } },
+
+
+        ]
+        )
+        // Response expected:    "{
+        //         ""price"": 3.45,
+        //         ""productCode"": ""4333"",
+        //         ""Zip"": ""95200"",
+        //         ""prixMinRungis"": {
+        //              ""productCode"": ""3421"",
+        //              ""productName"": ""Tomate ronde cagette"",
+        //              ""productPrice"": 1.5,
+        //          },
+        //         ""concurrent_1"": {
+        //              ""productCode"": ""6633"",
+        //              ""productName"": ""Tomate ronde des sables"",  
+        //              ""productPrice"": 3.45,
+        //              ""horaire"": 10,
+        //              ""ecart"": 950,
+        //              ""anciennete"": 24,
+        //          },
+        //         ""concurrent_2"": {
+        //              ""productCode"":  ""6632"",    
+        //              ""productName"": ""Tomate ronde vrac"",  
+        //              ""productPrice"": 1.5,
+        //              ""horaire"": 9,
+        //              ""ecart"": 800,
+        //              ""anciennete"": 60,
+        //          }, 
+        //         ""prixDrive"": {
+        //              ""productCode"": ""3421"",
+        //              ""productName"": ""Tomate ronde cagette"",
+        //              ""productPrice_today"": 1.5,  
+        //              ""productPrice_yesterday"": 1.70, 
+        //              ""productNew"": ""Tomate cerise allongée"",
+        //              ""productPrice_New"": 0.99,
+        //          },
+        //         ""autre_info_reponse"": """"
+        // }"
+        console.log(PricesRungis)
+        res.json(PricesRungis)
+        res.status(200)
+    }
+})
+
+
 
 router.route('/update/:id').put((req, res, next) => {
     price.findByIdAndUpdate(req.params.id, {

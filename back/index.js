@@ -11,6 +11,8 @@ let database = require('./database/db');
 const priceRoute = require('../back/routes/price.routes')
 const userRoute = require('../back/routes/user.routes')
 const businessRoute = require('../back/routes/business.routes');
+const rungisRoute = require('../back/routes/rungis.routes')
+const matchingRoute = require('../back/routes/matching.routes')
 const { response } = require('express');
 
 mongoose.Promise = global.Promise;
@@ -49,6 +51,8 @@ app.use('/login', (req, res) => {
 app.use('/countprices', priceRoute)
 app.use('/', userRoute)
 app.use('/businesses', businessRoute)
+app.use('/rungis', rungisRoute)
+app.use('/matching', matchingRoute)
 
 const port = process.env.PORT || 4000;
 const server = app.listen(port, () => {

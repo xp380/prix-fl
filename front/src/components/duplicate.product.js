@@ -1,7 +1,5 @@
 import React from 'react';
 import CreateProduct from "./create.product";
-// import CreateBusiness from "./create-business";
-// import DataSearch from "./search";
 import contacts from './contacts';
 import { Tabs } from 'antd';
 
@@ -10,7 +8,6 @@ export default function Duplicate() {
 
     return (
         <>
-            {/* <DataSearch /> */}
             <Tabs defaultActiveKey="1"  >
                 <TabPane tab="Carrefour" key="1" >
                     <div style={{ display: "flex", flexwrap: "wrap", padding: "10px", margin: '0 100px' }} >
