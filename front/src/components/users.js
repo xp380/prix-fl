@@ -1,23 +1,23 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import DataTable from './data-table';
-import { BackTop } from 'antd'
+import { BackTop } from 'antd';
 
 export default class Users extends Component {
-
     constructor(props) {
         super(props);
         this.state = { usersCollection: [] };
     }
 
     componentDidMount() {
-        axios.get(`${process.env.REACT_APP_SERVER_URL}/`)
-            .then(res => {
+        axios
+            .get(`http://localhost:4000/`)
+            .then((res) => {
                 this.setState({ usersCollection: res.data });
             })
             .catch(function (error) {
                 console.log(error);
-            })
+            });
     }
 
     dataTable() {
@@ -28,7 +28,10 @@ export default class Users extends Component {
 
     render() {
         return (
-            <div className="wrapper-users" style={{ marginRight: "0px", paddingRight: "1px" }}>
+            <div
+                className="wrapper-users"
+                style={{ marginRight: '0px', paddingRight: '1px' }}
+            >
                 <div className="container">
                     <table className="table table-striped table-dark">
                         <thead className="thead-dark">
@@ -58,7 +61,6 @@ export default class Users extends Component {
                     </table>
                 </div>
             </div>
-        )
+        );
     }
 }
-
